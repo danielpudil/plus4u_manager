@@ -41,6 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "danielpudil.plus4u-manager.danielpudil.plus4u-manager.showActivity" {
+            print("goTO")
+        }
+        else if shortcutItem.type == "danielpudil.plus4u-manager.danielpudil.plus4u-manager.findPerson" {
+            print("goTO")
+        }
+    }
 }
 

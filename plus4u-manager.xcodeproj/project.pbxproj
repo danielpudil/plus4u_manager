@@ -13,8 +13,37 @@
 		2802FEE42049CF13004A2C02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2802FEE22049CF13004A2C02 /* Main.storyboard */; };
 		2802FEE62049CF13004A2C02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2802FEE52049CF13004A2C02 /* Assets.xcassets */; };
 		2802FEE92049CF13004A2C02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2802FEE72049CF13004A2C02 /* LaunchScreen.storyboard */; };
-		2802FEF42049CF13004A2C02 /* plus4u_managerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802FEF32049CF13004A2C02 /* plus4u_managerTests.swift */; };
 		2802FEFF2049CF13004A2C02 /* plus4u_managerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802FEFE2049CF13004A2C02 /* plus4u_managerUITests.swift */; };
+		2802FF0E2049D190004A2C02 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2802FF0D2049D18F004A2C02 /* logo.png */; };
+		281361DA2052DDCD00684069 /* SettingsMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281361D92052DDCD00684069 /* SettingsMoreTableViewCell.swift */; };
+		282A75FB204FE74400F55071 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 282A75FA204FE74400F55071 /* icon.png */; };
+		282A75FD20509A8D00F55071 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 282A75FC20509A8C00F55071 /* dot.png */; };
+		28387304204D3CA000BC56EA /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28387303204D3CA000BC56EA /* TableViewCell.swift */; };
+		28387310204D89EA00BC56EA /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2838730F204D89EA00BC56EA /* settings@2x.png */; };
+		28387312204D8A4800BC56EA /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28387311204D8A4800BC56EA /* home@2x.png */; };
+		28387314204D8A5000BC56EA /* people@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28387313204D8A5000BC56EA /* people@2x.png */; };
+		28742F4E2056EB150039AC44 /* today_apps@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28742F4D2056EB150039AC44 /* today_apps@2x.png */; };
+		28777DDB204F03D30043B7A1 /* exit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28777DDA204F03D20043B7A1 /* exit@2x.png */; };
+		28777DDD204F32740043B7A1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28777DDC204F32730043B7A1 /* refresh@2x.png */; };
+		28777DDF204F42EF0043B7A1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28777DDE204F42EF0043B7A1 /* SettingsViewController.swift */; };
+		28777DE1204F43CF0043B7A1 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28777DE0204F43CF0043B7A1 /* SettingsTableViewCell.swift */; };
+		287E1CA3204AE10800FF9FD6 /* Plus4U.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287E1CA2204AE10800FF9FD6 /* Plus4U.swift */; };
+		287E1CA5204AF1F200FF9FD6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287E1CA4204AF1F200FF9FD6 /* TableViewController.swift */; };
+		28886B0C205598D0000ED91F /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28886B0B205598CF000ED91F /* checked@2x.png */; };
+		28886B1020559A38000ED91F /* state_active.gif in Resources */ = {isa = PBXBuildFile; fileRef = 28886B0D20559A38000ED91F /* state_active.gif */; };
+		28886B1120559A38000ED91F /* state_final.gif in Resources */ = {isa = PBXBuildFile; fileRef = 28886B0E20559A38000ED91F /* state_final.gif */; };
+		28886B1220559A38000ED91F /* state_initial.gif in Resources */ = {isa = PBXBuildFile; fileRef = 28886B0F20559A38000ED91F /* state_initial.gif */; };
+		28928952204BEA4C004B53D4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28928951204BEA4C004B53D4 /* LoginViewController.swift */; };
+		28928954204C4F8B004B53D4 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28928953204C4F8B004B53D4 /* PeopleViewController.swift */; };
+		28948308204C7CDF008A2473 /* SendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28948307204C7CDF008A2473 /* SendMessageViewController.swift */; };
+		2894830A204CA583008A2473 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28948309204CA583008A2473 /* ActivityViewController.swift */; };
+		28AB42D1205868D3006DA5ED /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AB42D0205868D3006DA5ED /* DiaryTableViewController.swift */; };
+		28B63AE020594FAE00CD6C09 /* SetCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63ADF20594FAE00CD6C09 /* SetCodesViewController.swift */; };
+		28B63AE22059671800CD6C09 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B63AE12059671800CD6C09 /* DiaryTableViewCell.swift */; };
+		28D5F938205432AA00A61626 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D5F937205432AA00A61626 /* WebViewController.swift */; };
+		28D5F93A20544FC500A61626 /* menu_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D5F93920544FC400A61626 /* menu_dot.png */; };
+		28D5F93C205450AC00A61626 /* menu_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D5F93B205450AC00A61626 /* menu_dot.png */; };
+		28D5F93E205468CB00A61626 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D5F93D205468CA00A61626 /* calendar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2802FED92049CF12004A2C02 /* plus4u-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "plus4u-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2802FED92049CF12004A2C02 /* Plus4U Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plus4U Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2802FEDC2049CF12004A2C02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2802FEDE2049CF13004A2C02 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		2802FEE02049CF13004A2C02 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -44,11 +73,39 @@
 		2802FEE82049CF13004A2C02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2802FEEA2049CF13004A2C02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2802FEEF2049CF13004A2C02 /* plus4u-managerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "plus4u-managerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2802FEF32049CF13004A2C02 /* plus4u_managerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plus4u_managerTests.swift; sourceTree = "<group>"; };
-		2802FEF52049CF13004A2C02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2802FEFA2049CF13004A2C02 /* plus4u-managerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "plus4u-managerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2802FEFE2049CF13004A2C02 /* plus4u_managerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plus4u_managerUITests.swift; sourceTree = "<group>"; };
 		2802FF002049CF13004A2C02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2802FF0D2049D18F004A2C02 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		281361D92052DDCD00684069 /* SettingsMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMoreTableViewCell.swift; sourceTree = "<group>"; };
+		282A75FA204FE74400F55071 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		282A75FC20509A8C00F55071 /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = ../../../../../../Downloads/dot.png; sourceTree = "<group>"; };
+		28387303204D3CA000BC56EA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		2838730F204D89EA00BC56EA /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/settings@2x.png"; sourceTree = "<group>"; };
+		28387311204D8A4800BC56EA /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/home@2x.png"; sourceTree = "<group>"; };
+		28387313204D8A5000BC56EA /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "people@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/people@2x.png"; sourceTree = "<group>"; };
+		28742F4D2056EB150039AC44 /* today_apps@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "today_apps@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/today_apps@2x.png"; sourceTree = "<group>"; };
+		28777DDA204F03D20043B7A1 /* exit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exit@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/exit@2x.png"; sourceTree = "<group>"; };
+		28777DDC204F32730043B7A1 /* refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/refresh@2x.png"; sourceTree = "<group>"; };
+		28777DDE204F42EF0043B7A1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		28777DE0204F43CF0043B7A1 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		287E1CA2204AE10800FF9FD6 /* Plus4U.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plus4U.swift; sourceTree = "<group>"; };
+		287E1CA4204AF1F200FF9FD6 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		28886B0B205598CF000ED91F /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checked@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/checked@2x.png"; sourceTree = "<group>"; };
+		28886B0D20559A38000ED91F /* state_active.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = state_active.gif; sourceTree = "<group>"; };
+		28886B0E20559A38000ED91F /* state_final.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = state_final.gif; sourceTree = "<group>"; };
+		28886B0F20559A38000ED91F /* state_initial.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = state_initial.gif; sourceTree = "<group>"; };
+		28928951204BEA4C004B53D4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		28928953204C4F8B004B53D4 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
+		28948307204C7CDF008A2473 /* SendMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageViewController.swift; sourceTree = "<group>"; };
+		28948309204CA583008A2473 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		28AB42D0205868D3006DA5ED /* DiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
+		28B63ADF20594FAE00CD6C09 /* SetCodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCodesViewController.swift; sourceTree = "<group>"; };
+		28B63AE12059671800CD6C09 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
+		28D5F937205432AA00A61626 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		28D5F93920544FC400A61626 /* menu_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_dot.png; path = ../../../../../../Downloads/menu_dot.png; sourceTree = "<group>"; };
+		28D5F93B205450AC00A61626 /* menu_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_dot.png; path = ../../../../../../Downloads/menu_dot.png; sourceTree = "<group>"; };
+		28D5F93D205468CA00A61626 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calendar@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/calendar@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +136,8 @@
 		2802FED02049CF12004A2C02 = {
 			isa = PBXGroup;
 			children = (
+				2802FF0C2049D117004A2C02 /* Assets */,
 				2802FEDB2049CF12004A2C02 /* plus4u-manager */,
-				2802FEF22049CF13004A2C02 /* plus4u-managerTests */,
 				2802FEFD2049CF13004A2C02 /* plus4u-managerUITests */,
 				2802FEDA2049CF12004A2C02 /* Products */,
 			);
@@ -89,7 +146,7 @@
 		2802FEDA2049CF12004A2C02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2802FED92049CF12004A2C02 /* plus4u-manager.app */,
+				2802FED92049CF12004A2C02 /* Plus4U Manager.app */,
 				2802FEEF2049CF13004A2C02 /* plus4u-managerTests.xctest */,
 				2802FEFA2049CF13004A2C02 /* plus4u-managerUITests.xctest */,
 			);
@@ -99,6 +156,7 @@
 		2802FEDB2049CF12004A2C02 /* plus4u-manager */ = {
 			isa = PBXGroup;
 			children = (
+				28387303204D3CA000BC56EA /* TableViewCell.swift */,
 				2802FEDC2049CF12004A2C02 /* AppDelegate.swift */,
 				2802FEDE2049CF13004A2C02 /* FirstViewController.swift */,
 				2802FEE02049CF13004A2C02 /* SecondViewController.swift */,
@@ -106,17 +164,21 @@
 				2802FEE52049CF13004A2C02 /* Assets.xcassets */,
 				2802FEE72049CF13004A2C02 /* LaunchScreen.storyboard */,
 				2802FEEA2049CF13004A2C02 /* Info.plist */,
+				287E1CA2204AE10800FF9FD6 /* Plus4U.swift */,
+				287E1CA4204AF1F200FF9FD6 /* TableViewController.swift */,
+				28928951204BEA4C004B53D4 /* LoginViewController.swift */,
+				28928953204C4F8B004B53D4 /* PeopleViewController.swift */,
+				28948307204C7CDF008A2473 /* SendMessageViewController.swift */,
+				28948309204CA583008A2473 /* ActivityViewController.swift */,
+				28777DDE204F42EF0043B7A1 /* SettingsViewController.swift */,
+				28777DE0204F43CF0043B7A1 /* SettingsTableViewCell.swift */,
+				281361D92052DDCD00684069 /* SettingsMoreTableViewCell.swift */,
+				28D5F937205432AA00A61626 /* WebViewController.swift */,
+				28AB42D0205868D3006DA5ED /* DiaryTableViewController.swift */,
+				28B63ADF20594FAE00CD6C09 /* SetCodesViewController.swift */,
+				28B63AE12059671800CD6C09 /* DiaryTableViewCell.swift */,
 			);
 			path = "plus4u-manager";
-			sourceTree = "<group>";
-		};
-		2802FEF22049CF13004A2C02 /* plus4u-managerTests */ = {
-			isa = PBXGroup;
-			children = (
-				2802FEF32049CF13004A2C02 /* plus4u_managerTests.swift */,
-				2802FEF52049CF13004A2C02 /* Info.plist */,
-			);
-			path = "plus4u-managerTests";
 			sourceTree = "<group>";
 		};
 		2802FEFD2049CF13004A2C02 /* plus4u-managerUITests */ = {
@@ -126,6 +188,29 @@
 				2802FF002049CF13004A2C02 /* Info.plist */,
 			);
 			path = "plus4u-managerUITests";
+			sourceTree = "<group>";
+		};
+		2802FF0C2049D117004A2C02 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				28742F4D2056EB150039AC44 /* today_apps@2x.png */,
+				28886B0D20559A38000ED91F /* state_active.gif */,
+				28886B0E20559A38000ED91F /* state_final.gif */,
+				28886B0F20559A38000ED91F /* state_initial.gif */,
+				28D5F93D205468CA00A61626 /* calendar@2x.png */,
+				28886B0B205598CF000ED91F /* checked@2x.png */,
+				28D5F93920544FC400A61626 /* menu_dot.png */,
+				28D5F93B205450AC00A61626 /* menu_dot.png */,
+				282A75FC20509A8C00F55071 /* dot.png */,
+				282A75FA204FE74400F55071 /* icon.png */,
+				28777DDC204F32730043B7A1 /* refresh@2x.png */,
+				28777DDA204F03D20043B7A1 /* exit@2x.png */,
+				28387313204D8A5000BC56EA /* people@2x.png */,
+				28387311204D8A4800BC56EA /* home@2x.png */,
+				2838730F204D89EA00BC56EA /* settings@2x.png */,
+				2802FF0D2049D18F004A2C02 /* logo.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +230,7 @@
 			);
 			name = "plus4u-manager";
 			productName = "plus4u-manager";
-			productReference = 2802FED92049CF12004A2C02 /* plus4u-manager.app */;
+			productReference = 2802FED92049CF12004A2C02 /* Plus4U Manager.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2802FEEE2049CF13004A2C02 /* plus4u-managerTests */ = {
@@ -235,8 +320,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28886B1020559A38000ED91F /* state_active.gif in Resources */,
+				28387310204D89EA00BC56EA /* settings@2x.png in Resources */,
+				2802FF0E2049D190004A2C02 /* logo.png in Resources */,
+				282A75FD20509A8D00F55071 /* dot.png in Resources */,
+				28D5F93C205450AC00A61626 /* menu_dot.png in Resources */,
+				28777DDB204F03D30043B7A1 /* exit@2x.png in Resources */,
+				28387314204D8A5000BC56EA /* people@2x.png in Resources */,
+				28777DDD204F32740043B7A1 /* refresh@2x.png in Resources */,
 				2802FEE92049CF13004A2C02 /* LaunchScreen.storyboard in Resources */,
+				28886B1120559A38000ED91F /* state_final.gif in Resources */,
+				282A75FB204FE74400F55071 /* icon.png in Resources */,
+				28886B1220559A38000ED91F /* state_initial.gif in Resources */,
+				28387312204D8A4800BC56EA /* home@2x.png in Resources */,
+				28D5F93E205468CB00A61626 /* calendar@2x.png in Resources */,
+				28742F4E2056EB150039AC44 /* today_apps@2x.png in Resources */,
+				28886B0C205598D0000ED91F /* checked@2x.png in Resources */,
 				2802FEE62049CF13004A2C02 /* Assets.xcassets in Resources */,
+				28D5F93A20544FC500A61626 /* menu_dot.png in Resources */,
 				2802FEE42049CF13004A2C02 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,8 +363,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B63AE020594FAE00CD6C09 /* SetCodesViewController.swift in Sources */,
+				28948308204C7CDF008A2473 /* SendMessageViewController.swift in Sources */,
+				28928952204BEA4C004B53D4 /* LoginViewController.swift in Sources */,
+				28777DE1204F43CF0043B7A1 /* SettingsTableViewCell.swift in Sources */,
+				28777DDF204F42EF0043B7A1 /* SettingsViewController.swift in Sources */,
+				28AB42D1205868D3006DA5ED /* DiaryTableViewController.swift in Sources */,
+				28B63AE22059671800CD6C09 /* DiaryTableViewCell.swift in Sources */,
+				28928954204C4F8B004B53D4 /* PeopleViewController.swift in Sources */,
+				287E1CA3204AE10800FF9FD6 /* Plus4U.swift in Sources */,
+				2894830A204CA583008A2473 /* ActivityViewController.swift in Sources */,
+				28387304204D3CA000BC56EA /* TableViewCell.swift in Sources */,
 				2802FEE12049CF13004A2C02 /* SecondViewController.swift in Sources */,
 				2802FEDD2049CF12004A2C02 /* AppDelegate.swift in Sources */,
+				287E1CA5204AF1F200FF9FD6 /* TableViewController.swift in Sources */,
+				28D5F938205432AA00A61626 /* WebViewController.swift in Sources */,
+				281361DA2052DDCD00684069 /* SettingsMoreTableViewCell.swift in Sources */,
 				2802FEDF2049CF13004A2C02 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +387,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2802FEF42049CF13004A2C02 /* plus4u_managerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +549,7 @@
 				INFOPLIST_FILE = "plus4u-manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "danielpudil.plus4u-manager";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Plus4U Manager";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -450,7 +564,7 @@
 				INFOPLIST_FILE = "plus4u-manager/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "danielpudil.plus4u-manager";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Plus4U Manager";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
