@@ -240,10 +240,10 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="bookmarks" id="TOB-LQ-GkE">
+                            <barButtonItem systemItem="compose" id="TOB-LQ-GkE">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </barButtonItem>
-                            <barButtonItem title="14. 3. 2018" id="Pk5-aC-9FY">
+                            <barButtonItem title="22. 3. 2018" id="Pk5-aC-9FY">
                                 <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </barButtonItem>
                         </rightBarButtonItems>

@@ -50,7 +50,7 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         
         tableView.rowHeight = 80
         self.tableView.rowHeight = 80
-        cell.nameActivity.text = "Název aktivity"
+        cell.nameActivity.text = fetchedPerson[indexPath.row].subject
         
         let dateStringStart: String = fetchedPerson[indexPath.row].dateStart
         let dateStringEnd: String = fetchedPerson[indexPath.row].dateEnd
@@ -114,11 +114,12 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
                     
                     let activities = fetchedData["activities"] as! [NSArray]
                     
-                    for activity in activities as! [AnyObject] {
-                        let end = activity["dateEnd"] as! String
+                    for activity in activities as [AnyObject] {
+                        let end = activity["dateTo"] as! String
                         let start = activity["dateStart"] as! String
+                        let subject = activity["name"] as! String
                         
-                        self.fetchedPerson.append(Reservation(dateEnd: end, dateStart: start))
+                        self.fetchedPerson.append(Reservation(dateEnd: end, dateStart: start, subject: subject))
                     }
                     
                     self.tableView.reloadData()
@@ -138,9 +139,11 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
 class Reservation {
     var dateEnd : String
     var dateStart : String
+    var subject : String
     
-    init(dateEnd: String, dateStart: String) {
+    init(dateEnd: String, dateStart: String, subject: String) {
         self.dateEnd = dateEnd
         self.dateStart = dateStart
+        self.subject = subject
     }
 }

@@ -101,9 +101,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let fetchedData = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! [String: Any]
                     
                     let territories = fetchedData["activities"] as! [NSArray]
-                    
-                    for territory in territories {
-                        for activity in territory as! [AnyObject] {
+  
+                    for activity in territories as [AnyObject] {
                             let name = activity["name"] as! String
                             let description = activity["activityStateDescription"] as! String
                             let state = activity["activityStateType"] as! String
@@ -116,7 +115,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
                             self.fetchedPerson.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri))
                         }
-                    }
                     
                     self.tableView.reloadData()
                     self.refresher.endRefreshing()
