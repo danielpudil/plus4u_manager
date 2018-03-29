@@ -7,16 +7,38 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        if self.window!.rootViewController as? UITabBarController != nil {
+            let tababarController = self.window!.rootViewController as! UITabBarController
+            tababarController.selectedIndex = 1
+        }
+    
         return true
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        if let vc = window?.rootViewController as? FirstViewController {
+//            let content = UNMutableNotificationContent()
+//            content.title = "Nové aktivity"
+//            content.body = "Byly zobrazeny nejnovější aktivity."
+//            content.badge = 1
+//
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//
+//            let request = UNNotificationRequest(identifier: "timeDone", content: content, trigger: trigger)
+//
+//            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+//
+//            vc.parseData()
+//        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -10,29 +10,33 @@ import UIKit
 
 class DiaryTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
 
-    var fetchedPerson = [Reservation]()
+    var fetchedReservations = [Reservation]()
     var firstCode = ""
     var secondCode = ""
-    let date = NSDate()
-    let calendar = NSCalendar.current
+    let date = Date()
+    let formatter = DateFormatter()
+    var activityType = true
     
     @IBOutlet weak var actualDate: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.actualDate.title = "14. 3. 2018"
+        formatter.dateFormat = "dd.MM.yyyy"
+        let result = formatter.string(from: date)
+        self.actualDate.title = result
         
         setCredetials()
-        parseData()
+        offlineMode()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -41,7 +45,7 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedPerson.count
+        return fetchedReservations.count
     }
     
     
@@ -50,10 +54,10 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         
         tableView.rowHeight = 80
         self.tableView.rowHeight = 80
-        cell.nameActivity.text = fetchedPerson[indexPath.row].subject
+        cell.nameActivity.text = fetchedReservations[indexPath.row].subject
         
-        let dateStringStart: String = fetchedPerson[indexPath.row].dateStart
-        let dateStringEnd: String = fetchedPerson[indexPath.row].dateEnd
+        let dateStringStart: String = fetchedReservations[indexPath.row].dateStart
+        let dateStringEnd: String = fetchedReservations[indexPath.row].dateEnd
         
         let dateFormatter1: DateFormatter = DateFormatter()
         dateFormatter1.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -70,7 +74,7 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         let timeTo = dateFormatter1.string(from: yourDateEnd as Date)
         
         cell.dateActivity.text = dateFrom
-        cell.timeActivity.text = timeFrom + " - " + timeTo
+        cell.timeActivity.text = timeFrom
   
         return cell
     }
@@ -85,17 +89,36 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    func offlineMode() {
+        if let activities = UserDefaults.standard.object(forKey: "appDataReservations") {
+            for activity in activities as! [AnyObject] {
+                let end = activity["dateTo"] as! String
+                let start = activity["dateStart"] as! String
+                let subject = activity["name"] as! String
+                
+                self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject))
+            }
+            
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+        }
+        else {
+            print("sync data...")
+            parseData()
+        }
+    }
+    
     @IBAction func refreshData(_ sender: UIBarButtonItem) {
         self.parseData()
     }
     
     func parseData() {
-        fetchedPerson = []
+        fetchedReservations = []
         self.loader.startAnimating()
         self.tableView.isHidden = true
         
-        var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/getActivityList?"
-        url = url + "code1=\(firstCode)" + "&code2=\(secondCode)"
+        let address = IPAddress().getCommandUri(command: "getActivityList") as! String
+        let url = "\(address)?" + "code1=\(firstCode)" + "&code2=\(secondCode)"
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
@@ -119,8 +142,10 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
                         let start = activity["dateStart"] as! String
                         let subject = activity["name"] as! String
                         
-                        self.fetchedPerson.append(Reservation(dateEnd: end, dateStart: start, subject: subject))
+                        self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject))
                     }
+                    
+                    UserDefaults.standard.set(activities, forKey: "appDataReservations")
                     
                     self.tableView.reloadData()
                     self.tableView.isHidden = false

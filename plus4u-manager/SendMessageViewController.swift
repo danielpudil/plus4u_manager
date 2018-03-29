@@ -71,8 +71,8 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
             
             let aParameter = aMessage.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
             
-            var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/sendMessage?"
-            url = url + "code1=\(firstCode)"
+            let address = IPAddress().getCommandUri(command: "sendMessage") as! String
+            let url = "\(address)?" + "code1=\(firstCode)"
                       + "&code2=\(secondCode)"
                       + "&uri=\(aUri)"
                       + "&p4u_id=\(aUID)"

@@ -50,8 +50,8 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let aPersonName = personName
         let aParameter = aPersonName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
         
-        var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/findPersonByParameters?"
-        url = url + "code1=\(firstCode)" + "&code2=\(secondCode)" + "&clientName=\(aParameter)"
+        let address = IPAddress().getCommandUri(command: "findPersonByParameters") as! String
+        let url = "\(address)?" + "code1=\(firstCode)" + "&code2=\(secondCode)" + "&clientName=\(aParameter)"
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"

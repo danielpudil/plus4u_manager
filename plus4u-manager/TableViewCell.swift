@@ -13,9 +13,15 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var myDescription: UILabel!
     @IBOutlet weak var myState: UIImageView!
+    @IBOutlet weak var tableView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        tableView.layer.shadowOpacity = 0.2
+        tableView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        tableView.layer.shadowRadius = 15.0
+        tableView.layer.shadowColor = UIColor.darkGray.cgColor
         // Initialization code
     }
 

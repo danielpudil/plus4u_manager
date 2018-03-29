@@ -22,6 +22,8 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     var firstCode = ""
     var secondCode = ""
     
+    var messageTextField: UITextField?
+    
     @IBOutlet weak var activityName: UILabel!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var competentName: UILabel!
@@ -51,8 +53,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destVS = segue.destination as! WebViewController
-        destVS.artifactUri = self.uri
+        
     }
     
     func setCredetials() {
@@ -64,47 +65,52 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             secondCode = x
         }
     }
-
+    
+    func messageTextField(textField: UITextField!) {
+        messageTextField = textField
+    }
+    
     @IBAction func setStateAction(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Nastavení stavu", message: "Nastavte stav aktivitě dle možností.", preferredStyle: .actionSheet)
         
-        let initial = UIAlertAction(title: "INITIAL", style: .default) {
+        let alertController = UIAlertController(title: "Nastav stav zprávy", message: "Komentář", preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: messageTextField)
+
+        let initial = UIAlertAction(title: "Přiděleno", style: .default) {
             (action) in self.seStateCommand(x: "INITIAL")
         }
-        
-        let active = UIAlertAction(title: "ACTIVE", style: .default) {
+
+        let active = UIAlertAction(title: "Akceptováno/Informováno", style: .default) {
             (action) in self.seStateCommand(x: "ACTIVE")
         }
-        
-        let final = UIAlertAction(title: "FINAL", style: .default) {
+
+        let final = UIAlertAction(title: "Dokončeno/Přečteno (FINAL)", style: .default) {
             (action) in self.seStateCommand(x: "FINAL")
         }
-        
-        let canceled = UIAlertAction(title: "CANCELED", style: .default) {
+
+        let canceled = UIAlertAction(title: "Zrušeno (FINAL)", style: .default) {
             (action) in self.seStateCommand(x: "CANCELED")
         }
-        
-        //cancel this action
+
         let cancel = UIAlertAction(title: "zrušit", style: .cancel) {
             (action) in print("canceled")
         }
-        
-        alert.addAction(initial)
-        alert.addAction(active)
-        alert.addAction(final)
-        alert.addAction(canceled)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
+
+        alertController.addAction(initial)
+        alertController.addAction(active)
+        alertController.addAction(final)
+        alertController.addAction(canceled)
+        alertController.addAction(cancel)
+
+        self.present(alertController, animated: true)
     }
     
     func seStateCommand(x:String) -> () {
         let state = x
             
-        let aParameter = descriptionActivity.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
-            
-        var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/setState?"
-        url = url + "code1=\(firstCode)"
+        var aParameter = messageTextField?.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
+
+        let address = IPAddress().getCommandUri(command: "setState") as! String
+        let url = "\(address)?" + "code1=\(firstCode)"
                 + "&code2=\(secondCode)"
                 + "&activityUri=\(activityUri)"
                 + "&activityStateType=\(state)"
@@ -121,7 +127,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
                 print("error")
             }
             else {
-                let alert = UIAlertController(title: "Aktivita nastavena na stav - \(state).", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Aktivita nastavena na stav - \(state).", message: nil, preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -150,6 +156,7 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
         }
         if tableView.tag == 3 {
             cell.textLabel?.text = artifact
+            UserDefaults.standard.set(self.uri, forKey: "webUri")
         }
             
         return cell

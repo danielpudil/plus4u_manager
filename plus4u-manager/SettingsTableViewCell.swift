@@ -16,7 +16,7 @@ class SettingsTableViewCell: UITableViewCell {
     
     @IBAction func `switch`(_ sender: UISwitch) {
         if nameOfSetting.text == "Automatické přihlašování" {
-            
+            UserDefaults.standard.set(false, forKey: "Přihlášení otiskem prstů")
         }
         UserDefaults.standard.set(sender.isOn, forKey: nameOfSetting.text!)
     }

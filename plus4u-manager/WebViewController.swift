@@ -17,7 +17,9 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let aParameter = artifactUri.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
+        let artifactUri = UserDefaults.standard.object(forKey: "webUri") as? String
+        
+        let aParameter = artifactUri?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
         
         let url = URL(string: "https://plus4u.net/ues/sesm?SessFree=" + aParameter)
         webView.loadRequest(URLRequest(url: url!))

@@ -18,19 +18,26 @@ class LoginViewController: UIViewController {
     
     var login = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.autoLogin()
+        self.touchID()
+        UIApplication.shared.applicationIconBadgeNumber = 0
+    }
+    
     @IBAction func buttonPressed(sender: UIButton) {
         self.loader.startAnimating()
         
-//        let alert = UIAlertController(title: nil, message: "Přihlášování...", preferredStyle: .alert)
-//
-//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-//        loadingIndicator.hidesWhenStopped = true
-//        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-//        loadingIndicator.startAnimating();
-//
-//        alert.view.addSubview(loadingIndicator)
-//        self.present(alert, animated: true, completion: nil)
-        
+        //        let alert = UIAlertController(title: nil, message: "Přihlášování...", preferredStyle: .alert)
+        //
+        //        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        //        loadingIndicator.hidesWhenStopped = true
+        //        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        //        loadingIndicator.startAnimating();
+        //
+        //        alert.view.addSubview(loadingIndicator)
+        //        self.present(alert, animated: true, completion: nil)
+
         parseData { (hasSucceed) in
             if hasSucceed {
                 UserDefaults.standard.set(self.firstCode.text, forKey: "firstCode")
@@ -47,18 +54,29 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func autoLogin() {
+        if let x = UserDefaults.standard.object(forKey: "Automatické přihlašování") as? Bool {
+            if x == true {
+                print("fdsfd")
+                OperationQueue.main.addOperation {
+                    [weak self] in
+                    self?.performSegue(withIdentifier: "yes", sender: self)
+                }
+            }
+        }
+    }
+    
     func touchID() {
         if let x = UserDefaults.standard.object(forKey: "Přihlášení otiskem prstů") as? Bool {
-
+            
             if x == true {
-                self.loader.startAnimating()
-                
                 let context:LAContext = LAContext()
-                
                 if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
                     context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Pro přihlášení do aplikace přiložte prst.", reply: { (wasSuccessful, error) in
                         
                         if wasSuccessful {
+                            self.setCodes()
+                            
                             self.parseData { (hasSucceed) in
                                 if hasSucceed {
                                     UserDefaults.standard.set(true, forKey: "login")
@@ -76,9 +94,13 @@ class LoginViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.touchID()
+    func setCodes(){
+        DispatchQueue.main.sync()
+        {
+            self.loader.startAnimating()
+            self.firstCode.text = UserDefaults.standard.object(forKey: "firstCode") as? String
+            self.secondCode.text = UserDefaults.standard.object(forKey: "secondCode") as? String
+        }
     }
     
     func parseData(completion : @escaping ( ( Bool ) -> Void)){
@@ -87,8 +109,8 @@ class LoginViewController: UIViewController {
         let aSecondCode = self.secondCode.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
 
         //192.168.242.208 10.0.1.16
-        var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/login?"
-        url = url + "code1=\(aFirstCode)" + "&code2=\(aSecondCode)"
+        let address = IPAddress().getCommandUri(command: "login") as! String
+        let url = "\(address)?" + "code1=\(aFirstCode)" + "&code2=\(aSecondCode)"
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"

@@ -15,6 +15,7 @@
 		2802FEE92049CF13004A2C02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2802FEE72049CF13004A2C02 /* LaunchScreen.storyboard */; };
 		2802FEFF2049CF13004A2C02 /* plus4u_managerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802FEFE2049CF13004A2C02 /* plus4u_managerUITests.swift */; };
 		2802FF0E2049D190004A2C02 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2802FF0D2049D18F004A2C02 /* logo.png */; };
+		2804FF132066BA8E00EAE1A0 /* order@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2804FF122066BA8E00EAE1A0 /* order@2x.png */; };
 		281361DA2052DDCD00684069 /* SettingsMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281361D92052DDCD00684069 /* SettingsMoreTableViewCell.swift */; };
 		282A75FB204FE74400F55071 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 282A75FA204FE74400F55071 /* icon.png */; };
 		282A75FD20509A8D00F55071 /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 282A75FC20509A8C00F55071 /* dot.png */; };
@@ -22,6 +23,7 @@
 		28387310204D89EA00BC56EA /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2838730F204D89EA00BC56EA /* settings@2x.png */; };
 		28387312204D8A4800BC56EA /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28387311204D8A4800BC56EA /* home@2x.png */; };
 		28387314204D8A5000BC56EA /* people@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28387313204D8A5000BC56EA /* people@2x.png */; };
+		28649FAB206D276300B9FDF7 /* IPAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28649FAA206D276300B9FDF7 /* IPAddress.swift */; };
 		28742F4E2056EB150039AC44 /* today_apps@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28742F4D2056EB150039AC44 /* today_apps@2x.png */; };
 		28777DDB204F03D30043B7A1 /* exit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28777DDA204F03D20043B7A1 /* exit@2x.png */; };
 		28777DDD204F32740043B7A1 /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28777DDC204F32730043B7A1 /* refresh@2x.png */; };
@@ -44,6 +46,8 @@
 		28D5F93A20544FC500A61626 /* menu_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D5F93920544FC400A61626 /* menu_dot.png */; };
 		28D5F93C205450AC00A61626 /* menu_dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D5F93B205450AC00A61626 /* menu_dot.png */; };
 		28D5F93E205468CB00A61626 /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D5F93D205468CA00A61626 /* calendar@2x.png */; };
+		28FFCF39206543220033C84E /* appData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28FFCF38206543220033C84E /* appData.plist */; };
+		28FFCF3D206556360033C84E /* CreateActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FFCF3C206556360033C84E /* CreateActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,7 @@
 		2802FEFE2049CF13004A2C02 /* plus4u_managerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plus4u_managerUITests.swift; sourceTree = "<group>"; };
 		2802FF002049CF13004A2C02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2802FF0D2049D18F004A2C02 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		2804FF122066BA8E00EAE1A0 /* order@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/order@2x.png"; sourceTree = "<group>"; };
 		281361D92052DDCD00684069 /* SettingsMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMoreTableViewCell.swift; sourceTree = "<group>"; };
 		282A75FA204FE74400F55071 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		282A75FC20509A8C00F55071 /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dot.png; path = ../../../../../../Downloads/dot.png; sourceTree = "<group>"; };
@@ -84,6 +89,7 @@
 		2838730F204D89EA00BC56EA /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/settings@2x.png"; sourceTree = "<group>"; };
 		28387311204D8A4800BC56EA /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/home@2x.png"; sourceTree = "<group>"; };
 		28387313204D8A5000BC56EA /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "people@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/people@2x.png"; sourceTree = "<group>"; };
+		28649FAA206D276300B9FDF7 /* IPAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPAddress.swift; sourceTree = "<group>"; };
 		28742F4D2056EB150039AC44 /* today_apps@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "today_apps@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/today_apps@2x.png"; sourceTree = "<group>"; };
 		28777DDA204F03D20043B7A1 /* exit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "exit@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/exit@2x.png"; sourceTree = "<group>"; };
 		28777DDC204F32730043B7A1 /* refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/refresh@2x.png"; sourceTree = "<group>"; };
@@ -106,6 +112,8 @@
 		28D5F93920544FC400A61626 /* menu_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_dot.png; path = ../../../../../../Downloads/menu_dot.png; sourceTree = "<group>"; };
 		28D5F93B205450AC00A61626 /* menu_dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu_dot.png; path = ../../../../../../Downloads/menu_dot.png; sourceTree = "<group>"; };
 		28D5F93D205468CA00A61626 /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "calendar@2x.png"; path = "../../../../../../Downloads/iOS_11_glyph_icons/PNG/calendar@2x.png"; sourceTree = "<group>"; };
+		28FFCF38206543220033C84E /* appData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = appData.plist; sourceTree = "<group>"; };
+		28FFCF3C206556360033C84E /* CreateActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,8 +164,8 @@
 		2802FEDB2049CF12004A2C02 /* plus4u-manager */ = {
 			isa = PBXGroup;
 			children = (
-				28387303204D3CA000BC56EA /* TableViewCell.swift */,
 				2802FEDC2049CF12004A2C02 /* AppDelegate.swift */,
+				28387303204D3CA000BC56EA /* TableViewCell.swift */,
 				2802FEDE2049CF13004A2C02 /* FirstViewController.swift */,
 				2802FEE02049CF13004A2C02 /* SecondViewController.swift */,
 				2802FEE22049CF13004A2C02 /* Main.storyboard */,
@@ -177,6 +185,9 @@
 				28AB42D0205868D3006DA5ED /* DiaryTableViewController.swift */,
 				28B63ADF20594FAE00CD6C09 /* SetCodesViewController.swift */,
 				28B63AE12059671800CD6C09 /* DiaryTableViewCell.swift */,
+				28FFCF38206543220033C84E /* appData.plist */,
+				28FFCF3C206556360033C84E /* CreateActivityViewController.swift */,
+				28649FAA206D276300B9FDF7 /* IPAddress.swift */,
 			);
 			path = "plus4u-manager";
 			sourceTree = "<group>";
@@ -193,6 +204,7 @@
 		2802FF0C2049D117004A2C02 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				2804FF122066BA8E00EAE1A0 /* order@2x.png */,
 				28742F4D2056EB150039AC44 /* today_apps@2x.png */,
 				28886B0D20559A38000ED91F /* state_active.gif */,
 				28886B0E20559A38000ED91F /* state_final.gif */,
@@ -282,6 +294,11 @@
 					2802FED82049CF12004A2C02 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					2802FEEE2049CF13004A2C02 = {
 						CreatedOnToolsVersion = 9.2;
@@ -326,7 +343,9 @@
 				282A75FD20509A8D00F55071 /* dot.png in Resources */,
 				28D5F93C205450AC00A61626 /* menu_dot.png in Resources */,
 				28777DDB204F03D30043B7A1 /* exit@2x.png in Resources */,
+				28FFCF39206543220033C84E /* appData.plist in Resources */,
 				28387314204D8A5000BC56EA /* people@2x.png in Resources */,
+				2804FF132066BA8E00EAE1A0 /* order@2x.png in Resources */,
 				28777DDD204F32740043B7A1 /* refresh@2x.png in Resources */,
 				2802FEE92049CF13004A2C02 /* LaunchScreen.storyboard in Resources */,
 				28886B1120559A38000ED91F /* state_final.gif in Resources */,
@@ -364,9 +383,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				28B63AE020594FAE00CD6C09 /* SetCodesViewController.swift in Sources */,
+				28FFCF3D206556360033C84E /* CreateActivityViewController.swift in Sources */,
 				28948308204C7CDF008A2473 /* SendMessageViewController.swift in Sources */,
 				28928952204BEA4C004B53D4 /* LoginViewController.swift in Sources */,
 				28777DE1204F43CF0043B7A1 /* SettingsTableViewCell.swift in Sources */,
+				28649FAB206D276300B9FDF7 /* IPAddress.swift in Sources */,
 				28777DDF204F42EF0043B7A1 /* SettingsViewController.swift in Sources */,
 				28AB42D1205868D3006DA5ED /* DiaryTableViewController.swift in Sources */,
 				28B63AE22059671800CD6C09 /* DiaryTableViewCell.swift in Sources */,

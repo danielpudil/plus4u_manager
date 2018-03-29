@@ -60,9 +60,9 @@ class SetCodesViewController: UIViewController {
         let newCode1Parameter = newCode1?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
         
         let newCode2Parameter = newCode2?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
-                
-        var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/changeCredentials?"
-            url = url + "oldCode1=\(firstCodeAuth)"
+        
+        let address = IPAddress().getCommandUri(command: "changeCredentials") as! String
+        let url = "\(address)?" + "oldCode1=\(firstCodeAuth)"
                 + "&oldCode2=\(secondCodeAuth)"
                 + "&newCode1=\(newCode1Parameter)"
                 + "&newCode2=\(newCode2Parameter)"

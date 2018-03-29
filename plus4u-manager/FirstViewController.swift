@@ -9,23 +9,20 @@
 import UIKit
 import UserNotifications
 
-class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var isSearching = false
     
     var activity = ActivityViewController()
-    var fetchedPerson = [Activities]()
+    var fetchedActivities = [Activities]()
     var filteredData = [Activities]()
     var refresher : UIRefreshControl!
     
     var firstCode = ""
     var secondCode = ""
     
-    @IBOutlet weak var calendar: UIBarButtonItem!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,17 +32,13 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
         self.tableView.isHidden = true
 
-        parseData()
-        
-        searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done
+        offlineMode()
         
         tableView.delegate = self
         tableView.dataSource = self
         
         refresher = UIRefreshControl()
         let attributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)]
-        
 
         refresher.attributedTitle = NSAttributedString(string: "Potažením aktualizujte", attributes: attributes)
         refresher.addTarget(self, action: #selector(FirstViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
@@ -53,14 +46,36 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tableView.addSubview(refresher)
         tableView.refreshControl = refresher
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, error in })
     }
     
-    
-    
     @IBAction func showCalendar(_ sender: UIBarButtonItem) {
-        searchBar.isHidden = !searchBar.isHidden
+
+    }
+    
+    func offlineMode() {
+        if let territories = UserDefaults.standard.object(forKey: "appDataActivities") {
+            for activity in territories as! [AnyObject] {
+                let name = activity["name"] as! String
+                let description = activity["activityStateDescription"] as! String
+                let state = activity["activityStateType"] as! String
+                let artifact = activity["artifactName"] as! String
+                let uri = activity["artifactUri"] as! String
+                let activityUri = activity["activityUri"] as! String
+                let competent = activity["competentRoleName"] as! String
+                let executive = activity["executiveRoleName"] as! String
+                let unRead = activity["isUnread"] as! Bool
+                let dateTo = activity["dateTo"] as! String
+                
+                self.fetchedActivities.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri, dateTo: dateTo))
+            }
+            
+            self.tableView.reloadData()
+            self.tableView.isHidden = false
+        }
+        else {
+            print("sync data...")
+            parseData()
+        }
     }
     
     func setCredetials() {
@@ -80,10 +95,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc func parseData() {
         self.tableView.isHidden = true
         self.loader.startAnimating()
-        fetchedPerson = []
+        fetchedActivities = []
         
-        var url = "http:10.0.1.16:6221/plus4u-managerg01-main/00000000000000000000000000000000-11111111111111111111111111111111/listActivities?"
-        url = url + "code1=\(firstCode)" + "&code2=\(secondCode)"
+        let address = IPAddress().getCommandUri(command: "listActivities") as! String
+        let url = "\(address)?" + "code1=\(firstCode)" + "&code2=\(secondCode)"
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
@@ -112,25 +127,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             let competent = activity["competentRoleName"] as! String
                             let executive = activity["executiveRoleName"] as! String
                             let unRead = activity["isUnread"] as! Bool
+                            let dateTo = activity["dateTo"] as! String
 
-                            self.fetchedPerson.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri))
-                        }
+                        self.fetchedActivities.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri, dateTo: dateTo))
+                    }
+                    
+                    UserDefaults.standard.set(territories, forKey: "appDataActivities")
                     
                     self.tableView.reloadData()
                     self.refresher.endRefreshing()
                     self.tableView.isHidden = false
                     self.loader.stopAnimating()
-                    
-                    let content = UNMutableNotificationContent()
-                    content.title = "Nové aktivity"
-                    content.body = "Byly zobrazeny nejnovější aktivity."
-                    content.badge = 1
-                    
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                    
-                    let request = UNNotificationRequest(identifier: "timeDone", content: content, trigger: trigger)
-                    
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                 }
                 catch {
                     self.loader.stopAnimating()
@@ -146,42 +153,49 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSearching {
-            return filteredData.count
-        }
-        
-        return fetchedPerson.count
+        return fetchedActivities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
-        cell.myLabel.text = fetchedPerson[indexPath.row].name
-
-        cell.myDescription.text = "Kompetentí role: " + fetchedPerson[indexPath.row].competent
         
-        if isSearching {
-            if filteredData[indexPath.row].state == "INITIAL" {
-                cell.myState.image = #imageLiteral(resourceName: "state_initial.gif")
-            }
-            if filteredData[indexPath.row].state == "ACTIVE" {
-                cell.myState.image = #imageLiteral(resourceName: "state_active.gif")
-            }
-            if filteredData[indexPath.row].state == "FINAL" {
-                cell.myState.image = #imageLiteral(resourceName: "state_final.gif")
-            }
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let result = formatter.string(from: date)
+        
+        let dateFormatter1: DateFormatter = DateFormatter()
+        dateFormatter1.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        let yourDateStart: NSDate = dateFormatter1.date(from: fetchedActivities[indexPath.row].dateTo)! as NSDate
+        
+        dateFormatter1.dateFormat = "dd.MM.yyyy"
+        let dateTo = dateFormatter1.string(from: yourDateStart as Date)
+        
+        let value = dateTo < result
+        
+        if value {
+            cell.myLabel.textColor = UIColor.red
         }
         else {
-            if fetchedPerson[indexPath.row].state == "INITIAL" {
-                cell.myState.image = #imageLiteral(resourceName: "state_initial.gif")
-            }
-            if fetchedPerson[indexPath.row].state == "ACTIVE" {
-                cell.myState.image = #imageLiteral(resourceName: "state_active.gif")
-            }
-            if fetchedPerson[indexPath.row].state == "FINAL" {
-                cell.myState.image = #imageLiteral(resourceName: "state_final.gif")
-            }
+            cell.myLabel.textColor = UIColor.black
+        }
+        
+        
+        cell.myLabel.text = fetchedActivities[indexPath.row].name
+
+        cell.myDescription.text = "Kompetentí role: " + fetchedActivities[indexPath.row].competent
+        
+        if fetchedActivities[indexPath.row].state == "INITIAL" {
+            cell.myState.image = #imageLiteral(resourceName: "state_initial.gif")
+        }
+        if fetchedActivities[indexPath.row].state == "ACTIVE" {
+            cell.myState.image = #imageLiteral(resourceName: "state_active.gif")
+        }
+        if fetchedActivities[indexPath.row].state == "FINAL" {
+            cell.myState.image = #imageLiteral(resourceName: "state_final.gif")
         }
 
         return cell
@@ -189,17 +203,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         do {
-            print(sender as Any)
             var selectedIndex = self.tableView.indexPath(for: sender as! UITableViewCell)
             let destVS = segue.destination as! ActivityViewController
             
-            destVS.name = fetchedPerson[(selectedIndex?.row)!].name
-            destVS.descriptionActivity = fetchedPerson[(selectedIndex?.row)!].description
-            destVS.artifact = fetchedPerson[(selectedIndex?.row)!].artifact
-            destVS.uri = fetchedPerson[(selectedIndex?.row)!].uri
-            destVS.competent = fetchedPerson[(selectedIndex?.row)!].competent
-            destVS.executive = fetchedPerson[(selectedIndex?.row)!].executive
-            destVS.activityUri = fetchedPerson[(selectedIndex?.row)!].activityUri
+            destVS.name = fetchedActivities[(selectedIndex?.row)!].name
+            destVS.descriptionActivity = fetchedActivities[(selectedIndex?.row)!].description
+            destVS.artifact = fetchedActivities[(selectedIndex?.row)!].artifact
+            destVS.uri = fetchedActivities[(selectedIndex?.row)!].uri
+            destVS.competent = fetchedActivities[(selectedIndex?.row)!].competent
+            destVS.executive = fetchedActivities[(selectedIndex?.row)!].executive
+            destVS.activityUri = fetchedActivities[(selectedIndex?.row)!].activityUri
         }
         catch let error {
             print(error.localizedDescription)
@@ -211,14 +224,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        fetchedPerson.remove(at: indexPath.item)
+        fetchedActivities.remove(at: indexPath.item)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let share = UITableViewRowAction(style: .normal, title: "Dokončeno") { action, index in
             //self.activity.seStateCommand(x: "FINAL")
+            print("fast action...")
+            self.fetchedActivities.remove(at: indexPath.item)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         share.backgroundColor = UIColor(red: (21/255.0), green: (126/255.0), blue: (251/255.0), alpha: 1.0)
         
@@ -231,19 +247,6 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.tableView.reloadData()
         refreshControl.endRefreshing()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text == "" || searchBar.text == nil {
-            isSearching = false
-            view.endEditing(true)
-            tableView.reloadData()
-        }
-        else {
-            isSearching = true
-            filteredData = fetchedPerson.filter({$0.name.contains(searchBar.text!)})
-            tableView.reloadData()
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -262,8 +265,9 @@ class Activities {
     var uri : String
     var unRead : Bool
     var activityUri: String
+    var dateTo: String
     
-    init(name: String, description: String, state: String, artifact: String, competent: String, executive: String, uri: String, unRead: Bool, activityUri: String) {
+    init(name: String, description: String, state: String, artifact: String, competent: String, executive: String, uri: String, unRead: Bool, activityUri: String, dateTo: String) {
         self.name = name
         self.description = description
         self.state = state
@@ -273,6 +277,7 @@ class Activities {
         self.uri = uri
         self.unRead = unRead
         self.activityUri = activityUri
+        self.dateTo = dateTo
     }
 }
 
