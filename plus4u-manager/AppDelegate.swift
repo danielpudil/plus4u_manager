@@ -8,6 +8,8 @@
 
 import UIKit
 import UserNotifications
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let tababarController = self.window!.rootViewController as! UITabBarController
             tababarController.selectedIndex = 1
         }
-    
+        Fabric.with([Crashlytics.self])
+
         return true
     }
     

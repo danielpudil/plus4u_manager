@@ -97,9 +97,24 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = fetchedPerson[indexPath.row].name
-        cell.detailTextLabel?.text = fetchedPerson[indexPath.row].p4u_id
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PersonTableViewCell
+        
+        let uri = fetchedPerson[indexPath.row].uri
+        
+        let urlKey = "https://plus4u.net/ues/uiwcp/ues/core/property/UESProperty/getImageData;jsessionid=F10963C2B6C49BAF809DF6FC7978DECF.0tcde02?uesuri=\(uri)%3AUU.PLUS4UPPL%2FPHOTO_MT"
+        
+        if let url = URL(string: urlKey) {
+            do {
+                let data = try Data(contentsOf: url)
+                cell.personImage.image = UIImage(data: data)
+            }
+            catch let err {
+                print(" Error : \(err.localizedDescription)")
+            }
+        }
+        
+        cell.personName.text = fetchedPerson[indexPath.row].name
+        cell.personUID.text = fetchedPerson[indexPath.row].p4u_id
         
         return cell
     }
@@ -121,6 +136,7 @@ class PeopleViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     class Person {
         var name : String

@@ -83,11 +83,11 @@ class ActivityViewController: UIViewController, UITableViewDelegate, UITableView
             (action) in self.seStateCommand(x: "ACTIVE")
         }
 
-        let final = UIAlertAction(title: "Dokončeno/Přečteno (FINAL)", style: .default) {
+        let final = UIAlertAction(title: "Dokončeno/Přečteno (FINAL)", style: .destructive) {
             (action) in self.seStateCommand(x: "FINAL")
         }
 
-        let canceled = UIAlertAction(title: "Zrušeno (FINAL)", style: .default) {
+        let canceled = UIAlertAction(title: "Zrušeno (FINAL)", style: .destructive) {
             (action) in self.seStateCommand(x: "CANCELED")
         }
 

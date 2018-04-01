@@ -34,6 +34,11 @@ class CreateActivityViewController: UIViewController, UITextFieldDelegate {
         self.nameActivity.delegate = self as? UITextViewDelegate as? UITextFieldDelegate
         self.descriptionActivity.delegate = self as? UITextViewDelegate
         self.executivesActivity.delegate = self as? UITextViewDelegate as? UITextFieldDelegate
+        
+        okButton.layer.shadowOpacity = 0.5
+        okButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        okButton.layer.shadowRadius = 5.0
+        okButton.layer.shadowColor = UIColor.darkGray.cgColor
     }
     
     @IBAction func addExecutivePerson(_ sender: UIButton) {

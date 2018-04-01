@@ -22,7 +22,10 @@ class SetCodesViewController: UIViewController {
         
         setCredetials()
 
-        // Do any additional setup after loading the view.
+        changeCodes.layer.shadowOpacity = 0.5
+        changeCodes.layer.shadowOffset = CGSize(width: 3, height: 3)
+        changeCodes.layer.shadowRadius = 5.0
+        changeCodes.layer.shadowColor = UIColor.darkGray.cgColor
     }
 
     override func didReceiveMemoryWarning() {

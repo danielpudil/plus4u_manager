@@ -12,8 +12,19 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var findPersonButton: UIButton!
     @IBOutlet weak var findPersonText: UITextField!
+    @IBOutlet weak var underline1: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        underline1.layer.shadowOpacity = 0.5
+        underline1.layer.shadowOffset = CGSize(width: 3, height: 3)
+        underline1.layer.shadowRadius = 5.0
+        underline1.layer.shadowColor = UIColor.darkGray.cgColor
+        
+        findPersonButton.layer.shadowOpacity = 0.5
+        findPersonButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        findPersonButton.layer.shadowRadius = 5.0
+        findPersonButton.layer.shadowColor = UIColor.darkGray.cgColor
         
         self.findPersonText.delegate = self
         // Do any additional setup after loading the view, typically from a nib.

@@ -13,6 +13,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var myDescription: UILabel!
     @IBOutlet weak var myState: UIImageView!
+    @IBOutlet weak var typeActivity: UIImageView!
     @IBOutlet weak var tableView: UIView!
     
     override func awakeFromNib() {

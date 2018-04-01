@@ -15,6 +15,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var secondCode: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var test: UIView!
+    @IBOutlet weak var underline1: UIView!
+    @IBOutlet weak var underline2: UIView!
     
     var login = false
     
@@ -22,7 +25,22 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.autoLogin()
         self.touchID()
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        UIApplication.shared.applicationIconBadgeNumber = 0 //F4F5F7
+        
+        loginButton.layer.shadowOpacity = 0.5
+        loginButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        loginButton.layer.shadowRadius = 5.0
+        loginButton.layer.shadowColor = UIColor.darkGray.cgColor
+        
+        underline1.layer.shadowOpacity = 0.5
+        underline1.layer.shadowOffset = CGSize(width: 3, height: 3)
+        underline1.layer.shadowRadius = 5.0
+        underline1.layer.shadowColor = UIColor.darkGray.cgColor
+        
+        underline2.layer.shadowOpacity = 0.5
+        underline2.layer.shadowOffset = CGSize(width: 3, height: 3)
+        underline2.layer.shadowRadius = 5.0
+        underline2.layer.shadowColor = UIColor.darkGray.cgColor
     }
     
     @IBAction func buttonPressed(sender: UIButton) {

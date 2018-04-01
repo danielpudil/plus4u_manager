@@ -65,8 +65,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let executive = activity["executiveRoleName"] as! String
                 let unRead = activity["isUnread"] as! Bool
                 let dateTo = activity["dateTo"] as! String
+                let type = activity["activityType"] as! String
                 
-                self.fetchedActivities.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri, dateTo: dateTo))
+                self.fetchedActivities.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri, dateTo: dateTo, type: type))
             }
             
             self.tableView.reloadData()
@@ -128,8 +129,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                             let executive = activity["executiveRoleName"] as! String
                             let unRead = activity["isUnread"] as! Bool
                             let dateTo = activity["dateTo"] as! String
+                            let type = activity["activityType"] as! String
 
-                        self.fetchedActivities.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri, dateTo: dateTo))
+                        self.fetchedActivities.append(Activities(name: name, description: description, state: state, artifact: artifact, competent: competent, executive: executive, uri: uri, unRead: unRead, activityUri: activityUri, dateTo: dateTo,type: type))
                     }
                     
                     UserDefaults.standard.set(territories, forKey: "appDataActivities")
@@ -197,6 +199,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if fetchedActivities[indexPath.row].state == "FINAL" {
             cell.myState.image = #imageLiteral(resourceName: "state_final.gif")
         }
+        
+        if fetchedActivities[indexPath.row].type == "TASK" {
+            cell.typeActivity.image = #imageLiteral(resourceName: "doit.gif")
+        }
+        if fetchedActivities[indexPath.row].type == "MESSAGE" {
+            cell.typeActivity.image = #imageLiteral(resourceName: "message.gif")
+        }
+        if fetchedActivities[indexPath.row].type == "TIME_RESERVATION" {
+            cell.typeActivity.image = #imageLiteral(resourceName: "reservation.gif")
+        }
 
         return cell
     }
@@ -231,8 +243,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let share = UITableViewRowAction(style: .normal, title: "Dokončeno") { action, index in
-            //self.activity.seStateCommand(x: "FINAL")
-            print("fast action...")
+            SetState().seStateCommand(state: "FINAL", activityUri: self.fetchedActivities[index.row].activityUri)
             self.fetchedActivities.remove(at: indexPath.item)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -259,6 +270,7 @@ class Activities {
     var name : String
     var description : String
     var state : String
+    var type : String
     var artifact : String
     var competent : String
     var executive : String
@@ -267,7 +279,7 @@ class Activities {
     var activityUri: String
     var dateTo: String
     
-    init(name: String, description: String, state: String, artifact: String, competent: String, executive: String, uri: String, unRead: Bool, activityUri: String, dateTo: String) {
+    init(name: String, description: String, state: String, artifact: String, competent: String, executive: String, uri: String, unRead: Bool, activityUri: String, dateTo: String, type: String) {
         self.name = name
         self.description = description
         self.state = state
@@ -278,6 +290,7 @@ class Activities {
         self.unRead = unRead
         self.activityUri = activityUri
         self.dateTo = dateTo
+        self.type = type
     }
 }
 

@@ -29,6 +29,11 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
         self.title = personName
         self.message.delegate = self as? UITextViewDelegate
         
+        sendButton.layer.shadowOpacity = 0.5
+        sendButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        sendButton.layer.shadowRadius = 5.0
+        sendButton.layer.shadowColor = UIColor.darkGray.cgColor
+        
         let aParameter = personUri.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
         let urlKey = "https://plus4u.net/ues/uiwcp/ues/core/property/UESProperty/getImageData;jsessionid=F10963C2B6C49BAF809DF6FC7978DECF.0tcde02?uesuri=\(aParameter)%3AUU.PLUS4UPPL%2FPHOTO_MT"
         print(urlKey)

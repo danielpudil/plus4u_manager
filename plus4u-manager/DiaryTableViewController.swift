@@ -75,6 +75,17 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         
         cell.dateActivity.text = dateFrom
         cell.timeActivity.text = timeFrom
+        
+        
+        if fetchedReservations[indexPath.row].activityStateType == "INITIAL" {
+            cell.myState.image = #imageLiteral(resourceName: "state_initial.gif")
+        }
+        if fetchedReservations[indexPath.row].activityStateType == "ACTIVE" {
+            cell.myState.image = #imageLiteral(resourceName: "state_active.gif")
+        }
+        if fetchedReservations[indexPath.row].activityStateType == "PROBLEM_ACTIVE" {
+            cell.myState.image = #imageLiteral(resourceName: "dismiss.gif")
+        }
   
         return cell
     }
@@ -95,8 +106,10 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
                 let end = activity["dateTo"] as! String
                 let start = activity["dateStart"] as! String
                 let subject = activity["name"] as! String
+                let activityUri = activity["activityUri"] as! String
+                let activityStateType = activity["activityStateType"] as! String
                 
-                self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject))
+                self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject, activityUri: activityUri, activityStateType: activityStateType))
             }
             
             self.tableView.reloadData()
@@ -141,8 +154,10 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
                         let end = activity["dateTo"] as! String
                         let start = activity["dateStart"] as! String
                         let subject = activity["name"] as! String
+                        let activityUri = activity["activityUri"] as! String
+                        let activityStateType = activity["activityStateType"] as! String
                         
-                        self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject))
+                        self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject, activityUri: activityUri, activityStateType: activityStateType))
                     }
                     
                     UserDefaults.standard.set(activities, forKey: "appDataReservations")
@@ -159,16 +174,48 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         }
         task.resume()
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        fetchedReservations.remove(at: indexPath.item)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let accept = UITableViewRowAction(style: .normal, title: "Účast akceptována") { action, index in
+            print("accept")
+            SetState().seStateCommand(state: "ACTIVE", activityUri: self.fetchedReservations[index.row].activityUri)
+            self.parseData()
+        }
+        let dismiss = UITableViewRowAction(style: .normal, title: "Účast odmítnuta") { action, index in
+            print("dismiss")
+            SetState().seStateCommand(state: "PROBLEM_ACTIVE", activityUri: self.fetchedReservations[index.row].activityUri)
+            self.parseData()
+        }
+        
+        accept.backgroundColor = UIColor(red: (103/255.0), green: (188/255.0), blue: (61/255.0), alpha: 1.0)
+        dismiss.backgroundColor = UIColor(red: (232/255.0), green: (69/255.0), blue: (60/255.0), alpha: 1.0)
+        
+        return [accept, dismiss]
+    }
 }
 
 class Reservation {
     var dateEnd : String
     var dateStart : String
     var subject : String
+    var activityUri : String
+    var activityStateType : String
     
-    init(dateEnd: String, dateStart: String, subject: String) {
+    init(dateEnd: String, dateStart: String, subject: String, activityUri: String, activityStateType: String) {
         self.dateEnd = dateEnd
         self.dateStart = dateStart
         self.subject = subject
+        self.activityUri = activityUri
+        self.activityStateType = activityStateType
     }
 }

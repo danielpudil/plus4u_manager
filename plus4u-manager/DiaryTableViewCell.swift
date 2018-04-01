@@ -14,6 +14,7 @@ class DiaryTableViewCell: UITableViewCell {
     @IBOutlet weak var dateActivity: UILabel!
     @IBOutlet weak var timeActivity: UILabel!
     @IBOutlet weak var tableView: UIView!
+    @IBOutlet weak var myState: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
