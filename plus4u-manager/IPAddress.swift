@@ -13,11 +13,12 @@ class IPAddress {
     var nameOfApp = "/plus4u-managerg01-main"
     var territory = "/00000000000000000000000000000000"
     var applicationWorkSpaceID = "-11111111111111111111111111111111"
-    var typeOfUrl = "http:"
+    var typeOfUrl = "http://"
     
     func getCommandUri(command: String) -> String? {
         let nameCommand = "/\(command)"
-        let ipAddress = "10.0.1.16"// self.getWiFiAddress() as! String
+        let ipAddress = "10.0.1.16"
+        //self.getWiFiAddress() as! String
         
         return  "\(typeOfUrl)\(ipAddress):6221\(self.nameOfApp)\(self.territory)\(self.applicationWorkSpaceID)\(nameCommand)"
     }

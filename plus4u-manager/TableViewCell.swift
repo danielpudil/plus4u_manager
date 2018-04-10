@@ -20,7 +20,7 @@ class TableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         tableView.layer.shadowOpacity = 0.2
-        tableView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        tableView.layer.shadowOffset = CGSize(width: 4, height: 4)
         tableView.layer.shadowRadius = 15.0
         tableView.layer.shadowColor = UIColor.darkGray.cgColor
         // Initialization code

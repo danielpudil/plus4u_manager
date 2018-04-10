@@ -31,7 +31,8 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tableView.dataSource = self
         self.tableView.isHidden = true
-
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         offlineMode()
         
         tableView.delegate = self
@@ -100,7 +101,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let address = IPAddress().getCommandUri(command: "listActivities") as! String
         let url = "\(address)?" + "code1=\(firstCode)" + "&code2=\(secondCode)"
-        
+            
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
         
@@ -175,6 +176,10 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         dateFormatter1.dateFormat = "dd.MM.yyyy"
         let dateTo = dateFormatter1.string(from: yourDateStart as Date)
+        
+        print(dateTo)
+        print(result)
+        print(dateTo < result)
         
         let value = dateTo < result
         

@@ -22,6 +22,7 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var buttonView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,10 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
         self.title = personName
         self.message.delegate = self as? UITextViewDelegate
         
-        sendButton.layer.shadowOpacity = 0.5
-        sendButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        sendButton.layer.shadowRadius = 5.0
-        sendButton.layer.shadowColor = UIColor.darkGray.cgColor
+        buttonView.layer.shadowOpacity = 0.5
+        buttonView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        buttonView.layer.shadowRadius = 5.0
+        buttonView.layer.shadowColor = UIColor.darkGray.cgColor
         
         let aParameter = personUri.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) as! String
         let urlKey = "https://plus4u.net/ues/uiwcp/ues/core/property/UESProperty/getImageData;jsessionid=F10963C2B6C49BAF809DF6FC7978DECF.0tcde02?uesuri=\(aParameter)%3AUU.PLUS4UPPL%2FPHOTO_MT"
@@ -41,6 +42,7 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
         if let url = URL(string: urlKey) {
             do {
                 let data = try Data(contentsOf: url)
+                print(data)
                 self.image.image = UIImage(data: data)
             }
             catch let err {

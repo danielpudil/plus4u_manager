@@ -10,12 +10,21 @@ import UIKit
 
 class DiaryTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
 
+    struct Objects {
+        var sectionName : String!
+        var sectionObjects : [Reservation]!
+    }
+    
+    var numberOfObjects = 0
+    
     var fetchedReservations = [Reservation]()
+    var objectsArray = [Objects]()
     var firstCode = ""
     var secondCode = ""
     let date = Date()
     let formatter = DateFormatter()
     var activityType = true
+    var refresher : UIRefreshControl!
     
     @IBOutlet weak var actualDate: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -24,12 +33,22 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setCredetials()
+        offlineMode()
+        
         formatter.dateFormat = "dd.MM.yyyy"
         let result = formatter.string(from: date)
         self.actualDate.title = result
         
-        setCredetials()
-        offlineMode()
+        refresher = UIRefreshControl()
+        let attributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12)]
+        
+        refresher.attributedTitle = NSAttributedString(string: "Potažením aktualizujte", attributes: attributes)
+        refresher.addTarget(self, action: #selector(DiaryTableViewController.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        refresher.tintColor = UIColor.white
+        
+        tableView.addSubview(refresher)
+        tableView.refreshControl = refresher
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,26 +57,16 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // MARK: - Table view data source
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedReservations.count
-    }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DiaryTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! DiaryTableViewCell
         
         tableView.rowHeight = 80
         self.tableView.rowHeight = 80
-        cell.nameActivity.text = fetchedReservations[indexPath.row].subject
+        cell.nameActivity.text = objectsArray[indexPath.section].sectionObjects[indexPath.row].subject
         
-        let dateStringStart: String = fetchedReservations[indexPath.row].dateStart
-        let dateStringEnd: String = fetchedReservations[indexPath.row].dateEnd
+        let dateStringStart: String = objectsArray[indexPath.section].sectionObjects[indexPath.row].dateStart
+        let dateStringEnd: String = objectsArray[indexPath.section].sectionObjects[indexPath.row].dateEnd
         
         let dateFormatter1: DateFormatter = DateFormatter()
         dateFormatter1.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -77,17 +86,47 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         cell.timeActivity.text = timeFrom
         
         
-        if fetchedReservations[indexPath.row].activityStateType == "INITIAL" {
+        if objectsArray[indexPath.section].sectionObjects[indexPath.row].activityStateType == "INITIAL" {
             cell.myState.image = #imageLiteral(resourceName: "state_initial.gif")
         }
-        if fetchedReservations[indexPath.row].activityStateType == "ACTIVE" {
+        if objectsArray[indexPath.section].sectionObjects[indexPath.row].activityStateType == "ACTIVE" {
             cell.myState.image = #imageLiteral(resourceName: "state_active.gif")
         }
-        if fetchedReservations[indexPath.row].activityStateType == "PROBLEM_ACTIVE" {
+        if objectsArray[indexPath.section].sectionObjects[indexPath.row].activityStateType == "PROBLEM_ACTIVE" {
             cell.myState.image = #imageLiteral(resourceName: "dismiss.gif")
         }
   
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.numberOfObjects > 0) {
+            return self.objectsArray[section].sectionObjects.count
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.objectsArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (self.numberOfObjects > 0) {
+            
+            let date = self.objectsArray[section].sectionName
+            let dateFormatter1: DateFormatter = DateFormatter()
+            dateFormatter1.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let yourDateStart: NSDate = dateFormatter1.date(from: date!)! as NSDate
+            dateFormatter1.dateFormat = "d. M. yyyy"
+            let dateName = dateFormatter1.string(from: yourDateStart as Date)
+            
+            return dateName
+        }
+        else {
+            return ""
+        }
     }
     
     func setCredetials() {
@@ -102,19 +141,30 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func offlineMode() {
         if let activities = UserDefaults.standard.object(forKey: "appDataReservations") {
-            for activity in activities as! [AnyObject] {
-                let end = activity["dateTo"] as! String
-                let start = activity["dateStart"] as! String
-                let subject = activity["name"] as! String
-                let activityUri = activity["activityUri"] as! String
-                let activityStateType = activity["activityStateType"] as! String
+            var date : String = ""
+            
+            for day_activity in activities as! [NSArray] {
+                for activity in day_activity as [AnyObject] {
+                    let end = activity["dateTo"] as! String
+                    let start = activity["dateStart"] as! String
+                    let subject = activity["name"] as! String
+                    let activityUri = activity["activityUri"] as! String
+                    let activityStateType = activity["activityStateType"] as! String
+                    date = start
+                    
+                    self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject, activityUri: activityUri, activityStateType: activityStateType))
+                }
                 
-                self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject, activityUri: activityUri, activityStateType: activityStateType))
+                self.objectsArray.append(Objects(sectionName: date, sectionObjects: self.fetchedReservations))
+                self.fetchedReservations = []
             }
+            
+            self.numberOfObjects = self.objectsArray.count
             
             self.tableView.reloadData()
             self.tableView.isHidden = false
         }
+            
         else {
             print("sync data...")
             parseData()
@@ -150,16 +200,25 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
                     
                     let activities = fetchedData["activities"] as! [NSArray]
                     
-                    for activity in activities as [AnyObject] {
-                        let end = activity["dateTo"] as! String
-                        let start = activity["dateStart"] as! String
-                        let subject = activity["name"] as! String
-                        let activityUri = activity["activityUri"] as! String
-                        let activityStateType = activity["activityStateType"] as! String
+                    var date : String = ""
+                    
+                    for day_activity in activities as [NSArray] {
+                        for activity in day_activity as [AnyObject] {
+                            let end = activity["dateTo"] as! String
+                            let start = activity["dateStart"] as! String
+                            let subject = activity["name"] as! String
+                            let activityUri = activity["activityUri"] as! String
+                            let activityStateType = activity["activityStateType"] as! String
+                            date = start
+                            
+                            self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject, activityUri: activityUri, activityStateType: activityStateType))
+                        }
                         
-                        self.fetchedReservations.append(Reservation(dateEnd: end, dateStart: start, subject: subject, activityUri: activityUri, activityStateType: activityStateType))
+                        self.objectsArray.append(Objects(sectionName: date, sectionObjects: self.fetchedReservations))
+                        self.fetchedReservations = []
                     }
                     
+                    self.numberOfObjects = self.objectsArray.count
                     UserDefaults.standard.set(activities, forKey: "appDataReservations")
                     
                     self.tableView.reloadData()
@@ -201,6 +260,14 @@ class DiaryTableViewController: UIViewController, UITableViewDataSource, UITable
         dismiss.backgroundColor = UIColor(red: (232/255.0), green: (69/255.0), blue: (60/255.0), alpha: 1.0)
         
         return [accept, dismiss]
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+        parseData()
+        
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }
 

@@ -23,7 +23,7 @@ class DiaryTableViewCell: UITableViewCell {
         tableView.layer.shadowOpacity = 0.2
         tableView.layer.shadowOffset = CGSize(width: 3, height: 3)
         tableView.layer.shadowRadius = 15.0
-        tableView.layer.shadowColor = UIColor.darkGray.cgColor
+        tableView.layer.shadowColor = UIColor.white.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
